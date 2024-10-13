@@ -7,3 +7,7 @@ get("/") do
   <p>Define some routes in app.rb</p>
   "
 end
+
+get("/howdy") do
+  erb(:hello)
+end
