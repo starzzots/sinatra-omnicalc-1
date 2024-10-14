@@ -5,12 +5,12 @@ ruby "3.2.1"
 
 gem "sinatra"
 gem "sinatra-contrib"
-
 # Use Puma as the app server
 gem "puma", "~> 5.0"
 
 # use active record
 gem "sinatra-activerecord"
+gem "http"
 
 group :development do
   gem "better_errors"
