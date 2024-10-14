@@ -4,40 +4,39 @@ require "sinatra/reloader"
 get("/") do
   erb(:homepage)
 end
-#######################################
+################################################################
 get("/square/new") do
   
   erb(:square)
 end
 get("/square/results") do
-  @number = params.fetch("users_number").to_i
+  @number = params.fetch("number").to_f
   @result = @number ** 2
   erb(:square_results)
 end
-###############################
+################################################################
 get("/square_root/new") do
   erb(:square_root)
 end
 get("/square_root/results") do
   @user_number = params.fetch("user_number").to_f
-  @result = Math.sqrt(@user_number)  
+  @result = Math.sqrt(@user_number) 
   erb(:square_root_result)
 end
-#################################
+#################################################################
 
 get("/payment/new") do
   erb(:payment)
 end
 
 get("/payment/results") do
-  @user_apr = params.fetch("user_apr").to_f.round(2)
+  @user_apr = params.fetch("user_apr").to_f.round(4)
   @user_years = params.fetch("user_years").to_i
   @user_pv = params.fetch("user_pv").to_f.round(2)
-  
+  @style_apr = sprintf('%.4f', @user_apr)
   # Calculate monthly payment directly in the route
   monthly_rate = @user_apr / 12.0 / 100.0
   total_payments = @user_years * 12
-
   if monthly_rate.zero?
     @monthly_payment = @user_pv / total_payments
   else
@@ -47,7 +46,14 @@ get("/payment/results") do
   end
   erb(:payment_results)
 end
-
+###################################################################
 get("/random/new") do
   erb(:random)
+end
+get("/random/results") do
+  @min = params.fetch("user_min").to_f
+  @max = params.fetch("user_max").to_f
+
+  @random_number = rand(@min..@max).to_f
+  erb(:random_results)
 end
